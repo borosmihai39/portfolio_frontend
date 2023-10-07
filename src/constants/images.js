@@ -23,7 +23,8 @@ import about02 from "../assets/about02.png";
 import about03 from "../assets/about03.png";
 import about04 from "../assets/about04.png";
 
-import profile from "../assets/profile.png";
+import profilePhoto from "../assets/profile_photo.png";
+import profilv2 from "../assets/profilv2.png";
 import circle from "../assets/circle.svg";
 import logo from "../assets/logo.png";
 
@@ -59,7 +60,7 @@ export default {
   about02,
   about03,
   about04,
-  profile,
+  profilePhoto,
   circle,
   logo,
   adidas,
@@ -69,4 +70,5 @@ export default {
   nb,
   skype,
   spotify,
+  profilv2,
 };
