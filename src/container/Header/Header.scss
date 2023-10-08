@@ -154,12 +154,12 @@
   flex: 1;
   height: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
   position: relative;
 
   img {
-    width: 100%;
+    width: 70%;
     object-fit: contain;
     z-index: 1;
   }
