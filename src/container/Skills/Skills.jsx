@@ -15,7 +15,8 @@ const Skills = () => {
     const skillsQuery = `*[_type == "skills"]`;
 
     client.fetch(query).then((data) => {
-      setExperience(data);
+      const sortedData = data.sort((a, b) => b.year - a.year);
+      setExperience(sortedData);
     });
 
     client.fetch(skillsQuery).then((data) => {
@@ -25,7 +26,7 @@ const Skills = () => {
 
   return (
     <>
-      <h2 className="head-text">Skills & Experience</h2>
+      <h2 className="head-text">Skills, Experience & Education</h2>
       <div className="app__skills-container">
         <motion.div className="app__skills-list">
           {skills?.map((skill) => (

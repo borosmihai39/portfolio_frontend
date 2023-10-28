@@ -13,9 +13,6 @@ const About = () => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log(abouts);
-  }, [abouts]);
   return (
     <>
       <h2 className="head-text">

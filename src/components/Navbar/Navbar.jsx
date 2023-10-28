@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 import { images } from "../../constants";
 import "./Navbar.scss";
@@ -27,23 +27,28 @@ const Navbar = () => {
       <div className="app__navbar-menu">
         <HiMenuAlt4 onClick={() => setToggle(true)} />
 
-        {toggle && (
-          <motion.div
-            whileInView={{ x: [200, 0] }}
-            transition={{ duration: 0.85, ease: "easeOut" }}
-          >
-            <HiX onClick={() => setToggle(false)} />
-            <ul>
-              {["home", "about", "work", "skills", "contact"].map((item) => (
-                <li key={item}>
-                  <a href={`#${item}`} onClick={() => setToggle(false)}>
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
+        <AnimatePresence>
+          {toggle && (
+            <motion.div
+              className="app__navbar-menu-items"
+              animate={{ x: 0 }}
+              initial={{ x: 300 }}
+              exit={{ x: 300 }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+            >
+              <HiX onClick={() => setToggle(false)} />
+              <ul>
+                {["home", "about", "work", "skills", "contact"].map((item) => (
+                  <li key={item}>
+                    <a href={`#${item}`} onClick={() => setToggle(false)}>
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
