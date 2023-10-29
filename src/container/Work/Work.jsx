@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from "react";
 import { AiFillEye, AiFillGithub } from "react-icons/ai";
 import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../wrapper";
 import { urlFor, client } from "../../client";
+import { isDesktop, isMobile } from "react-device-detect";
 import "./Work.scss";
 
 const Work = () => {
@@ -10,7 +12,12 @@ const Work = () => {
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
   const [works, setWorks] = useState([]);
   const [filterWork, setFilterWork] = useState([]);
+  const [hoveredItem, setHoveredItem] = useState(null);
+  const [clickedItem, setClickedItem] = useState(null);
+
   const handleWorkFilter = (item) => {
+    setHoveredItem(null);
+    setClickedItem(null);
     setActiveFilter(item);
     setAnimateCard([{ y: 100, opacity: 0 }]);
     setTimeout(() => {
@@ -21,6 +28,22 @@ const Work = () => {
         setFilterWork(works.filter((work) => work.tags.includes(item)));
       }
     }, 500);
+  };
+
+  const handleMobileClick = (index) => {
+    if (hoveredItem === index) {
+      setHoveredItem(null);
+      setClickedItem(null);
+    } else {
+      setHoveredItem(index);
+      if (clickedItem === index) {
+        setClickedItem(null);
+      } else {
+        setTimeout(() => {
+          setClickedItem(index);
+        }, 100);
+      }
+    }
   };
 
   useEffect(() => {
@@ -62,11 +85,16 @@ const Work = () => {
         className="app__work-portfolio"
       >
         {filterWork.map((work, index) => (
-          <div className="app__work-item app__flex" key={index}>
+          <div
+            className="app__work-item app__flex"
+            key={index}
+            onClick={() => handleMobileClick(index)}
+          >
             <div className="app__work-img app__flex">
               <img src={urlFor(work.imgUrl)} alt={work.name} />
               <motion.div
-                whileHover={{ opacity: [0, 1] }}
+                whileHover={isDesktop && { opacity: [0, 1] }}
+                animate={isMobile && { opacity: hoveredItem === index ? 1 : 0 }}
                 transition={{
                   duration: 0.25,
                   ease: "easeInOut",
@@ -75,7 +103,14 @@ const Work = () => {
                 className="app__work-hover app__flex"
               >
                 {work.projectLink && (
-                  <a href={work.projectLink} target="_blank" rel="noreferrer">
+                  <a
+                    href={work.projectLink}
+                    style={{
+                      pointerEvents: clickedItem === index ? "auto" : "none",
+                    }}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <motion.div
                       whileInView={{ scale: [0, 1.1] }}
                       whileHover={{ scale: [1.1, 0.9] }}
@@ -89,7 +124,14 @@ const Work = () => {
                   </a>
                 )}
                 {work.codeLink && (
-                  <a href={work.codeLink} target="_blank" rel="noreferrer">
+                  <a
+                    href={work.codeLink}
+                    style={{
+                      pointerEvents: clickedItem === index ? "auto" : "none",
+                    }}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <motion.div
                       whileInView={{ scale: [0, 1.1] }}
                       whileHover={{ scale: [1.1, 0.9] }}

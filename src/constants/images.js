@@ -23,7 +23,7 @@ import about02 from "../assets/about02.png";
 import about03 from "../assets/about03.png";
 import about04 from "../assets/about04.png";
 
-import profilv2 from "../assets/profil_steve.png";
+import profilv2 from "../assets/profil_mb.webp";
 import circle from "../assets/circle.svg";
 import logo from "../assets/logo_v6.png";
 
