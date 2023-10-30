@@ -31,17 +31,19 @@ const Work = () => {
   };
 
   const handleMobileClick = (index) => {
-    if (hoveredItem === index) {
-      setHoveredItem(null);
-      setClickedItem(null);
-    } else {
-      setHoveredItem(index);
-      if (clickedItem === index) {
+    if (isMobile) {
+      if (hoveredItem === index) {
+        setHoveredItem(null);
         setClickedItem(null);
       } else {
-        setTimeout(() => {
-          setClickedItem(index);
-        }, 100);
+        setHoveredItem(index);
+        if (clickedItem === index) {
+          setClickedItem(null);
+        } else {
+          setTimeout(() => {
+            setClickedItem(index);
+          }, 100);
+        }
       }
     }
   };
@@ -105,9 +107,14 @@ const Work = () => {
                 {work.projectLink && (
                   <a
                     href={work.projectLink}
-                    style={{
-                      pointerEvents: clickedItem === index ? "auto" : "none",
-                    }}
+                    style={
+                      isMobile
+                        ? {
+                            pointerEvents:
+                              clickedItem === index ? "auto" : "none",
+                          }
+                        : null
+                    }
                     target="_blank"
                     rel="noreferrer"
                   >
@@ -126,9 +133,14 @@ const Work = () => {
                 {work.codeLink && (
                   <a
                     href={work.codeLink}
-                    style={{
-                      pointerEvents: clickedItem === index ? "auto" : "none",
-                    }}
+                    style={
+                      isMobile
+                        ? {
+                            pointerEvents:
+                              clickedItem === index ? "auto" : "none",
+                          }
+                        : null
+                    }
                     target="_blank"
                     rel="noreferrer"
                   >
