@@ -22,7 +22,8 @@
   }
 
   @media screen and (min-width: 2000px) {
-    min-height: 450px;
+    min-height: 1000px;
+    min-width: 2000px;
     img {
       width: 150px;
       height: 150px;
@@ -53,6 +54,10 @@
     line-height: 2rem;
     color: var(--black-color);
     font-family: var(--font-base);
+
+    @media screen and (min-width: 2000px) {
+      font-size: 2rem;
+    }
   }
 
   h4 {
